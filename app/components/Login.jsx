@@ -12,9 +12,7 @@ const Login = () => {
   const [message, setMessage] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [registered, setRegistered] = useState(false);
-  const [selectedAction, setSelectedAction] = useState("Select Action...");
-
-  console.log(selectedAction);
+  const [selectedAction, setSelectedAction] = useState("");
 
   const handleRegister = async () => {
     try {
@@ -44,21 +42,31 @@ const Login = () => {
       setLoggedIn(false);
     }
   };
+  // const setDisplay = (display) => {
+  //   if (selectedAction.toUpperCase() === "LOGIN") {
+  //     return "hidden";
+  //   } else if (selectedAction.toUpperCase() === "REGISTER") {
+  //     return "";
+  //   }
+  //   return display;
+  // };
+
   return (
-    <div className="flex justify-center align-middle min-w-sm">
-      <div>
+    <div className="flex flex-col rounded-sm justify-center align-middle min-w-sm bg-red-300 p-2">
+      <h1 className="text-2xl text-center font-extrabold">REGISTER / LOGIN</h1>
+      <div className="flex justify-center w-full">
         <select
-          className="w-full hover:cursor-pointer"
+          className=" min-w-sm hover:cursor-pointer bg-yellow-200 p-2 font-bold"
           value={selectedAction}
           onChange={(e) => setSelectedAction(e.target.value)}
         >
-          <option>None</option> 
+          <option>Select action...</option>
+          <option>None</option>
           <option>Register</option>
           <option>Login</option>
         </select>
       </div>
       <div className="flex flex-col w-full justify-center text-center align-middle space-y-4 ">
-        <h1 className="text-2xl font-extrabold">LOGIN</h1>
         <h4 className="text-green-900">{message}</h4>
         <label htmlFor="email">Enter your email:</label>
         <input
@@ -78,28 +86,38 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button
-          onClick={handleRegister}
-          className="bg-green-400 rounded-sm text-white h-10 font-bold hover:cursor-pointer hover:bg-green-300"
-        >
-          Register
-        </button>
-        <p>Already registered ?</p>
-        <button
-          onClick={handleLogin}
-          className="bg-green-400 rounded-sm text-white h-10 font-bold hover:cursor-pointer hover:bg-green-300"
-        >
-          Login
-        </button>
-        <div className="flex text-left justify-around align-middle">
-          <label htmlFor="check">Remember me</label>
-          <input
-            className="hover: cursor-pointer w-4"
-            name="check"
-            type="checkbox"
-            id="check"
-          />
+
+        <div>
+          {selectedAction.toLowerCase() === "register" && (
+            <button
+              onClick={handleRegister}
+              className="bg-green-400 rounded-sm text-white h-10 font-bold hover:cursor-pointer hover:bg-green-300 w-full"
+            >
+              Register
+            </button>
+          )}
         </div>
+
+        {selectedAction.toLowerCase() === "login" && (
+          <div>
+            <button
+              onClick={handleLogin}
+              className="bg-green-400 rounded-sm text-white h-10 font-bold hover:cursor-pointer hover:bg-green-300 w-full"
+            >
+              Login
+            </button>
+
+            <div className="flex text-left justify-around align-middle">
+              <label htmlFor="check">Remember me</label>
+              <input
+                className="hover: cursor-pointer w-4"
+                name="check"
+                type="checkbox"
+                id="check"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

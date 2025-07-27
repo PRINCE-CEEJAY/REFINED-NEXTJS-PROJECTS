@@ -1,9 +1,7 @@
 "use client";
-import React, { useState, useEffect, useContext } from "react";
-import { LoginData } from "../dashboard/page";
+import React, { useState, useEffect } from "react";
 
 const FetchData = () => {
-  const admin = useContext(LoginData);
   const [advice, setAdvice] = useState("");
   const [loadedAdvice, setLoadedAdvice] = useState("");
   const [dataCount, setDataCount] = useState(0);
@@ -41,24 +39,20 @@ const FetchData = () => {
     }
   };
   return (
-    <div className="flex flex-col justify-center  align-middle space-y-2 max-w-md">
+    <div className="flex flex-col justify-center items-center space-y-2 min-h-screen">
       <h1 className="text-center font-bold">Welcome {retrievedUser} </h1>
-      <div className="flex flex-col justfiy-center align-middle">
+      <div className="flex flex-col justfiy-center items-center">
         <h2 className="text-center font-bold text-blue-900">
           Number: {dataCount}
         </h2>
         <h1 className="text-center font-bold text-red-900">{advice}</h1>
         <button
-          className="bg-green-600 text-white hover:bg-green-400 cursor-pointer"
+          className="bg-green-600 text-white hover:bg-green-400 cursor-pointer w-full text-xl rounded-sm"
           onClick={handleGetAdvice}
         >
           Fetch Advice
         </button>
       </div>
-      <h1 className="text-center font-bold">
-        Brought to you by: {admin.name}, contact me on: {admin.phone} or email
-        me: {admin.email}
-      </h1>
     </div>
   );
 };

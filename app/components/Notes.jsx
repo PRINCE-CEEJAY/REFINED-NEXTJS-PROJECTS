@@ -1,19 +1,18 @@
 "use client";
 import React, { useState } from "react";
-
+import DialogBox from "./DialogBox";
 const Notes = () => {
   const [notes, setNotes] = useState("");
   const [status, setStatus] = useState("");
+  const [showDialog, setShowDialog] = useState(false);
 
   const handleSave = () => {
-    if (notes.trim && notes.length > 0) {
-      try {
-        const Store = localStorage.setItem("note", JSON.stringify(notes));
-        setStatus("Successfully saved");
-        setNotes("");
-      } catch (error) {
-        setStatus("Error occured ...", error);
-      }
+    if (notes.trim() && notes.length > 0) {
+      setShowDialog(true);
+      return;
+    } else {
+      setStatus("You must write note before you save");
+      setShowDialog(false);
     }
   };
   const handleDelete = () => {};
@@ -21,7 +20,27 @@ const Notes = () => {
   const handleEdit = () => {};
   return (
     <div className="flex flex-col min-w-sm min-h-screen ">
-      <div className="flex flex-col justify-center align-middle min-w-md mx-auto">
+      {showDialog && (
+        <DialogBox
+          notes={notes}
+          onClose={(waveSaved) => {
+            setShowDialog(false);
+            if (waveSaved) {
+              setStatus("Successfully saved");
+              setNotes("");
+            } else {
+              setStatus("Cancelled");
+            }
+          }}
+        />
+      )}
+      <div
+        className={
+          showDialog
+            ? "hidden"
+            : "flex flex-col justify-center align-middle min-w-md mx-auto"
+        }
+      >
         <h1 className="text-blue-800 font-extrabold text-3xl text-center">
           Note Taker
         </h1>

@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Notes from "./components/Notes";
 import { createContext } from "react";
 import Quiz from "./components/QUIZ";
+import Animation from "./components/Animation";
 
 export const Content = createContext();
 
@@ -81,10 +82,12 @@ export default function Home() {
   return (
     <Content.Provider value={quizData}>
       <div className="relative min-h-screen overflow-hidden min-w-screen">
-        <Login />
-        <Quiz />
-        <Notes />
-        <DialogBox />
+        <Animation />
+        {/* <Login />
+        <FetchData />
+        <Quiz /> */}
+        {/* <Notes /> */}
+        {/* <DialogBox /> */}
       </div>
     </Content.Provider>
   );

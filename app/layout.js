@@ -9,7 +9,18 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className="relative min-h-screen overflow-hidden">
+          {/* Background Layer */}
+          <div
+            className="fixed inset-0 -z-10 bg-cover bg-center opacity-30"
+            style={{
+              backgroundImage: "url('/female-developer.jpg')",
+            }}
+          />
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

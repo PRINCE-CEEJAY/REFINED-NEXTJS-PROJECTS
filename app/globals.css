@@ -1,7 +1,5 @@
 @import "tailwindcss";
-:root {
-  background-color: gray;
-}
+
 body {
   padding: 0;
   margin: 0;

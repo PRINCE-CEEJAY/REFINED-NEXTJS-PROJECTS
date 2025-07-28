@@ -1,0 +1,6 @@
+li {
+  color: red;
+}
+li:hover {
+  opacity: 0.7;
+}

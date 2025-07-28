@@ -18,8 +18,8 @@ export default function RootLayout({ children }) {
               backgroundImage: "url('/female-developer.jpg')",
             }}
           />
-          {children}
           <Navbar />
+          {children}
         </div>
       </body>
     </html>

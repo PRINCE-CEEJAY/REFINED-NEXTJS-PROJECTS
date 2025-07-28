@@ -6,6 +6,7 @@ import Notes from "./components/Notes";
 import { createContext } from "react";
 import Quiz from "./components/QUIZ";
 import Animation from "./components/Animation";
+import Footer from "./components/Footer";
 
 export const Content = createContext();
 
@@ -88,6 +89,7 @@ export default function Home() {
         <Quiz /> */}
         {/* <Notes /> */}
         {/* <DialogBox /> */}
+        <Footer />
       </div>
     </Content.Provider>
   );

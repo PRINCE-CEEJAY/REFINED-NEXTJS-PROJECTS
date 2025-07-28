@@ -1,15 +1,18 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import useFetch from "../hooks/UseFetch";
 
 const FetchData = () => {
-  const [advice, setAdvice] = useState("");
+  const { data, loading, refetch } = useFetch(
+    "https://api.adviceslip.com/advice"
+  );
   const [loadedAdvice, setLoadedAdvice] = useState("");
   const [dataCount, setDataCount] = useState(0);
   const [retrievedUser, setretrievedUser] = useState(null);
 
   useEffect(() => {
-    fetchAdvice();
-  }, [advice]);
+    console.log("new Advice " + dataCount);
+  }, [loadedAdvice]);
 
   useEffect(() => {
     try {
@@ -21,21 +24,11 @@ const FetchData = () => {
     }
   }, []);
 
-  const fetchAdvice = async () => {
-    try {
-      const data = await fetch("https://api.adviceslip.com/advice");
-      const res = await data.json();
-      setLoadedAdvice(res.slip.advice);
-    } catch (error) {
-      setLoadedAdvice(error.message);
-    }
-  };
-  const handleGetAdvice = () => {
-    if (loadedAdvice && loadedAdvice.length !== 0) {
-      setAdvice(loadedAdvice);
-      setDataCount((prevCount) => prevCount + 1);
-    } else {
-      setAdvice("Loading...");
+  const handleGetAdvice = async () => {
+    await refetch(); // trigger fetch
+    if (data?.slip?.advice) {
+      setLoadedAdvice(data.slip.advice);
+      setDataCount((prev) => prev + 1);
     }
   };
   return (
@@ -45,9 +38,11 @@ const FetchData = () => {
         <h2 className="text-center font-bold text-blue-900">
           Number: {dataCount}
         </h2>
-        <h1 className="text-center font-bold text-red-900">{advice}</h1>
+        <h1 className="text-center font-bold text-red-900">
+          {loading ? "Loading..." : loadedAdvice}
+        </h1>
         <button
-          className="bg-green-600 text-white hover:bg-green-400 cursor-pointer w-full text-xl rounded-sm"
+          className="bg-green-600 cursor-pointer text-white hover:bg-green-400  w-full text-xl rounded-sm"
           onClick={handleGetAdvice}
         >
           Fetch Advice

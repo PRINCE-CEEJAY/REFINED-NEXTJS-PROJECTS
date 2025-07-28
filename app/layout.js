@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="relative min-h-screen overflow-hidden">
+        <div className="flex min-h-screen overflow-hidden">
           {/* Background Layer */}
           <div
             className="fixed inset-0 -z-10 bg-cover bg-center opacity-30"

@@ -9,42 +9,47 @@ const Navbar = () => {
         <div className="flex justify-center hover:cursor-pointer">
           <img src="/welcome.jpg" alt="Profile Pic" width={100} height={100} />
         </div>
-        <div className="flex space-x-3 items-center">
+        <section className="flex space-x-3 items-center">
+          <div>icon</div>
+          <Link href="/sidebar/homepage">
+            <ul>
+              <li>Homepage</li>
+            </ul>
+          </Link>
+        </section>
+        <section className="flex space-x-3 items-center">
           <div>icon</div>
           <Link href="/sidebar/dashboard">
             <ul>
               <li>Dashboard</li>
             </ul>
           </Link>
-        </div>
-        <div className="flex space-x-3 items-center">
+        </section>
+        <section className="flex space-x-3 items-center">
           <div>icon</div>
           <Link href="/sidebar/about">
             <ul>
               <li>About Us</li>
             </ul>
           </Link>
-        </div>
-        <div className="flex space-x-3 items-center">
+        </section>
+        <section className="flex space-x-3 items-center">
           <div>icon</div>
           <Link href="/sidebar/feeds">
             <ul>
               <li>Feeds</li>
             </ul>
           </Link>
-        </div>
-        <div className="flex space-x-3 items-center">
+        </section>
+        <section className="flex space-x-3 items-center">
           <div>icon</div>
           <Link href="/sidebar/notifications">
             <ul>
               <li>Notifications</li>
             </ul>
           </Link>
-        </div>
+        </section>
       </nav>
-      <div className="mt-[100%]">
-        <h1>Nav Bottom</h1>
-      </div>
     </div>
   );
 };

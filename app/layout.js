@@ -1,5 +1,5 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "./navbar/Navbar";
 
 export const metadata = {
   title: "QUIZ APP",
@@ -19,6 +19,7 @@ export default function RootLayout({ children }) {
             }}
           />
           {children}
+          <Navbar />
         </div>
       </body>
     </html>

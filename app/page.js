@@ -2,11 +2,9 @@
 import DialogBox from "./components/DialogBox";
 import FetchData from "./components/FetchData";
 import Login from "./components/Login";
-import Notes from "./components/Notes";
 import { createContext } from "react";
-import Quiz from "./components/QUIZ";
+
 import Animation from "./components/Animation";
-import Footer from "./components/Footer";
 
 export const Content = createContext();
 
@@ -84,12 +82,7 @@ export default function Home() {
     <Content.Provider value={quizData}>
       <div className="relative min-h-screen overflow-hidden min-w-screen">
         <Animation />
-        {/* <Login />
-        <FetchData />
-        <Quiz /> */}
-        {/* <Notes /> */}
-        {/* <DialogBox /> */}
-        <Footer />
+        <Login />
       </div>
     </Content.Provider>
   );

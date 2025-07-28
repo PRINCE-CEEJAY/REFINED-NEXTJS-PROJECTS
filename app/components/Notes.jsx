@@ -23,9 +23,9 @@ const Notes = () => {
       {showDialog && (
         <DialogBox
           notes={notes}
-          onClose={(waveSaved) => {
+          onClose={(wasSaved) => {
             setShowDialog(false);
-            if (waveSaved) {
+            if (wasSaved) {
               setStatus("Successfully saved");
               setNotes("");
             } else {

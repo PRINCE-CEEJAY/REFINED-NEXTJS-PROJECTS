@@ -6,8 +6,6 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-import dashboard from "../dashboard/page";
-import Dashboard from "../dashboard/page";
 import { useRouter } from "next/navigation";
 
 const Login = () => {
@@ -69,7 +67,7 @@ const Login = () => {
   useEffect(() => {
     if (user) {
       try {
-        router.push("/dashboard");
+        router.push("/sidebar/dashboard");
       } catch (error) {
         console.log("failed to load", error);
       }
@@ -77,9 +75,14 @@ const Login = () => {
   }, [user]);
 
   //storing user in localStorage too
-  if (user) {
-    const storedUser = localStorage.setItem("storedUser", JSON.stringify(user));
-  }
+  useEffect(() => {
+    if (user) {
+      const storedUser = localStorage.setItem(
+        "storedUser",
+        JSON.stringify(user)
+      );
+    }
+  }, [user]);
 
   return (
     <div className="flex flex-col rounded-sm justify-center items-center min-h-screen p-2 ">

@@ -8,7 +8,6 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   const isLocked = process.env.NEXT_PUBLIC_PRIVATE_MODE === "true";
-
   if (isLocked) {
     return (
       <html lang="en">

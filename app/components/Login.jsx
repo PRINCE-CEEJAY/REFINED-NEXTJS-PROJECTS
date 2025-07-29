@@ -1,166 +1,99 @@
+// components/Login.js
 "use client";
-import React, { useEffect, useState } from "react";
-import { auth, googleAuth, provider } from "../firebase";
+import React, { useState, useEffect, useContext } from "react";
+import { auth, provider } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { userCredential } from "./UserProvider";
 
 const Login = () => {
   const router = useRouter();
+  const { setUser } = useContext(userCredential); // now from global context
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [registered, setRegistered] = useState(false);
   const [selectedAction, setSelectedAction] = useState("");
-  const [user, setUser] = useState(null);
 
-  const handleRegister = async () => {
+  const handleAuth = async (type) => {
     try {
       setMessage("Loading...");
-      await createUserWithEmailAndPassword(auth, email, password);
-      setMessage(`Successfully registered ${auth.currentUser.email}`);
-      setEmail("");
-      setPassword("");
-      setRegistered(true);
-      setUser(auth.currentUser.email);
+
+      if (type === "register") {
+        await createUserWithEmailAndPassword(auth, email, password);
+      } else {
+        await signInWithEmailAndPassword(auth, email, password);
+      }
+
+      const currentUser = auth.currentUser.email;
+      setUser(currentUser);
+      localStorage.setItem("storedUser", JSON.stringify(currentUser));
+      router.push("/sidebar/dashboard");
     } catch (error) {
-      console.log(error);
       setMessage(error.message);
-      setRegistered(false);
     }
   };
 
-  const handleLogin = async () => {
-    try {
-      setMessage("Loading...");
-      await signInWithEmailAndPassword(auth, email, password);
-      setMessage(`Successfully logged in as ${auth.currentUser.email}`);
-      setLoggedIn(true);
-      setEmail("");
-      setPassword("");
-      setUser(auth.currentUser.email);
-    } catch (error) {
-      setMessage(error.message);
-      setLoggedIn(false);
-    }
-  };
-
-  const handleLoginWithGoogle = async () => {
+  const handleGoogle = async () => {
     try {
       setMessage("Loading...");
       const result = await signInWithPopup(auth, provider);
-      setMessage(`Successfully logged in as ${result.user}`);
-      setLoggedIn(true);
-      setEmail("");
-      setPassword("");
-      setUser(result.user);
+      const email = result.user.email;
+      setUser(email);
+      localStorage.setItem("storedUser", JSON.stringify(email));
+      router.push("/sidebar/dashboard");
     } catch (error) {
       setMessage(error.message);
-      setLoggedIn(false);
     }
   };
 
-  useEffect(() => {
-    if (user) {
-      try {
-        router.push("/sidebar/dashboard");
-      } catch (error) {
-        console.log("failed to load", error);
-      }
-    }
-  }, [user]);
-
-  //storing user in localStorage too
-  useEffect(() => {
-    if (user) {
-      const storedUser = localStorage.setItem(
-        "storedUser",
-        JSON.stringify(user)
-      );
-    }
-  }, [user]);
-
   return (
-    <div className="flex flex-col rounded-sm justify-center items-center min-h-screen p-2 ">
-      <h1 className="text-2xl text-center max-w-md font-extrabold">
-        REGISTER / LOGIN
-      </h1>
+    <div className="flex flex-col justify-center items-center min-h-screen p-4">
+      <h1 className="text-2xl font-bold">Login / Register</h1>
+      <h4 className="text-green-600">{message}</h4>
 
-      <div className="flex flex-col w-md  justify-center text-center space-y-4 ">
-        <h4 className="text-green-900">{message}</h4>
-        <label htmlFor="email">Enter your email:</label>
-        <input
-          name="email"
-          type="text"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <label htmlFor="email">Enter your Password</label>
-        <input
-          name="password"
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+      <input
+        type="text"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="border p-2 m-2 w-full"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="border p-2 m-2 w-full"
+      />
 
-        <div>
-          {selectedAction.toLowerCase() === "register" && (
-            <button
-              onClick={handleRegister}
-              className="bg-green-400 rounded-sm text-white h-10 font-bold hover:cursor-pointer hover:bg-green-300 w-full"
-            >
-              Register
-            </button>
-          )}
-        </div>
+      <select
+        value={selectedAction}
+        onChange={(e) => setSelectedAction(e.target.value)}
+        className="p-2 m-2 w-full"
+      >
+        <option>Select action...</option>
+        <option value="register">Register</option>
+        <option value="login">Login</option>
+      </select>
 
-        {selectedAction.toLowerCase() === "login" && (
-          <div className="space-y-3">
-            <button
-              onClick={handleLogin}
-              className="bg-green-400 rounded-sm text-white h-10 font-bold hover:cursor-pointer hover:bg-green-300 w-full"
-            >
-              Login
-            </button>
-            <button
-              onClick={handleLoginWithGoogle}
-              className="bg-green-400 rounded-sm text-white h-10 font-bold hover:cursor-pointer hover:bg-green-300 w-full"
-            >
-              SignIn with Google
-            </button>
+      <button
+        onClick={() => handleAuth(selectedAction)}
+        className="bg-green-500 text-white p-2 w-full my-2"
+      >
+        {selectedAction === "register" ? "Register" : "Login"}
+      </button>
 
-            <div className="flex text-left justify-around align-middle">
-              <label htmlFor="check">Remember me</label>
-              <input
-                className="hover: cursor-pointer w-4"
-                name="check"
-                type="checkbox"
-                id="check"
-              />
-            </div>
-          </div>
-        )}
-        <div className="flex justify-center max-w-md item-center">
-          <select
-            className=" min-w-sm hover:cursor-pointer  p-2 font-bold"
-            value={selectedAction}
-            onChange={(e) => setSelectedAction(e.target.value)}
-          >
-            <option>Select action...</option>
-            <option>None</option>
-            <option>Register</option>
-            <option>Login</option>
-          </select>
-        </div>
-      </div>
+      <button
+        onClick={handleGoogle}
+        className="bg-red-500 text-white p-2 w-full my-2"
+      >
+        Sign in with Google
+      </button>
     </div>
   );
 };

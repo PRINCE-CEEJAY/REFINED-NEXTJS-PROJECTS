@@ -52,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen p-4">
+    <div className="flex flex-col w-md justify-center items-center min-h-screen p-4">
       <h1 className="text-2xl font-bold">Login / Register</h1>
       <h4 className="text-green-600">{message}</h4>
 

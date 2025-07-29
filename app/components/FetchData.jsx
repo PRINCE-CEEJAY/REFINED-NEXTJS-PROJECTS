@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import useFetch from "../hooks/UseFetch";
+import { motion } from "framer-motion";
 
 const FetchData = () => {
   const { data, loading, refetch } = useFetch(
@@ -39,12 +40,14 @@ const FetchData = () => {
         <h1 className="text-center font-bold text-red-900 text-5xl">
           {loading ? "Loading..." : loadedAdvice}
         </h1>
-        <button
-          className="bg-green-600 cursor-pointer text-white hover:bg-green-400 font-extrabold text-2xl rounded-sm mt-4 p-2"
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="bg-green-600 cursor-pointer text-white hover:bg-green-400 font-extrabold text-2xl rounded-sm mt-4 p-4"
           onClick={handleGetAdvice}
         >
           Fetch Advice
-        </button>
+        </motion.button>
       </div>
     </div>
   );

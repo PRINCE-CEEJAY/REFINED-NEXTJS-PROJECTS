@@ -3,7 +3,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div>
+    <div className="flex justify-center items-center min-h-screen">
       <h1 className="text-center text-3xl text-green-900">Join us today</h1>
       <Login />
     </div>

@@ -7,6 +7,24 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const isLocked = process.env.NEXT_PUBLIC_PRIVATE_MODE === "true";
+
+  if (isLocked) {
+    return (
+      <html lang="en">
+        <body>
+          <div className="flex items-center justify-center min-h-screen bg-black text-white">
+            <div className="text-center">
+              <h1 className="text-2xl font-bold">🚧 Site Under Construction</h1>
+              <p className="mt-4">
+                This project is not yet public. Please check back later.
+              </p>
+            </div>
+          </div>
+        </body>
+      </html>
+    );
+  }
   return (
     <html lang="en">
       <body>

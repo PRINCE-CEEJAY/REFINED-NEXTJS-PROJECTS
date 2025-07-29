@@ -78,12 +78,29 @@ let quizData = [
 ];
 
 export default function Home() {
-  return (
-    <Content.Provider value={quizData}>
-      <div className="relative min-h-screen overflow-hidden min-w-screen">
-        <Animation />
-        <Login />
+  const isLocked = process.env.NEXT_PUBLIC_PRIVATE_MODE === "true";
+
+  if (isLocked) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-black text-white">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold">🚧 Site Under Construction</h1>
+          <p className="mt-4">
+            This project is not yet public. Please check back later.
+          </p>
+        </div>
       </div>
-    </Content.Provider>
+    );
+  }
+
+  return (
+    <main>
+      <Content.Provider value={quizData}>
+        <div className="relative min-h-screen overflow-hidden min-w-screen">
+          <Animation />
+          <Login />
+        </div>
+      </Content.Provider>
+    </main>
   );
 }

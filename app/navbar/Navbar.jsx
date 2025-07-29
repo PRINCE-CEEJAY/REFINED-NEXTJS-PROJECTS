@@ -7,6 +7,7 @@ import { SlFeed } from "react-icons/sl";
 import { IoNotificationsCircle } from "react-icons/io5";
 import { FcAbout } from "react-icons/fc";
 import { FcFaq } from "react-icons/fc";
+import { MdJoinFull } from "react-icons/md";
 
 const Navbar = () => {
   return (
@@ -50,6 +51,13 @@ const Navbar = () => {
         >
           <FcAbout />
           <li>About Us</li>
+        </Link>
+        <Link
+          href="/sidebar/join"
+          className="flex space-x-2 hover:text-blue-800 items-center"
+        >
+          <MdJoinFull />
+          <li>Join Us</li>
         </Link>
         <Link
           href="/sidebar/faq"

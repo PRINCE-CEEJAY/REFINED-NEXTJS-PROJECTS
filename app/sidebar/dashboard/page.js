@@ -3,7 +3,6 @@
 import React, { useContext } from "react";
 import FetchData from "@/app/components/FetchData";
 import Notes from "@/app/components/Notes";
-import Quiz from "@/app/components/QUIZ";
 import { userCredential } from "@/app/components/UserProvider";
 
 const DashboardPage = () => {
@@ -14,8 +13,9 @@ const DashboardPage = () => {
       <h1 className="text-center text-lg font-bold">
         Welcome {user || "Guest"}
       </h1>
+
       <FetchData />
-      <Quiz />
+
       <Notes />
     </div>
   );

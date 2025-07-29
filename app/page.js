@@ -2,9 +2,11 @@
 import DialogBox from "./components/DialogBox";
 import FetchData from "./components/FetchData";
 import Login from "./components/Login";
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 import Animation from "./components/Animation";
+import Quiz from "./components/QUIZ";
+import UserProvider, { userCredential } from "./components/UserProvider";
 
 export const Content = createContext();
 
@@ -78,12 +80,13 @@ let quizData = [
 ];
 
 export default function Home() {
+  const { user } = useContext(userCredential);
   return (
     <main>
       <Content.Provider value={quizData}>
         <div className="relative min-h-screen overflow-hidden min-w-screen">
           <Animation />
-          <Login />
+          {user && <Quiz />}
         </div>
       </Content.Provider>
     </main>

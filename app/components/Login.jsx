@@ -83,7 +83,7 @@ const Login = () => {
 
       <button
         onClick={() => handleAuth(selectedAction)}
-        className="bg-green-500 text-white p-2 w-full my-2"
+        className="bg-green-500 text-white p-2 w-full my-2 shadow-lg"
       >
         {selectedAction === "register" ? "Register" : "Login"}
       </button>

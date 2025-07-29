@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useReducer, useState } from "react";
 import { useContext } from "react";
-import { Content } from "../page";
+import { Content } from "@/app/page";
 
 const Quiz = () => {
   const quizData = useContext(Content);

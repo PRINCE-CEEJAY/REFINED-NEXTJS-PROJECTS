@@ -1,6 +1,6 @@
 // hooks/useFetch.js
 "use client";
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 const useFetch = (url) => {
   const [data, setData] = useState(null);
@@ -9,7 +9,9 @@ const useFetch = (url) => {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(url + "?" + Math.random()); // avoid caching
+      const response = await fetch(url); // ✅ removed random param
+      if (!response.ok)
+        throw new Error(`HTTP error! status: ${response.status}`);
       const json = await response.json();
       setData(json);
     } catch (err) {
@@ -18,10 +20,6 @@ const useFetch = (url) => {
       setLoading(false);
     }
   }, [url]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
 
   return { data, loading, refetch: fetchData };
 };

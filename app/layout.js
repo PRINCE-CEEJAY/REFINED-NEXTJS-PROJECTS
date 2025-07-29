@@ -1,9 +1,10 @@
 import "./globals.css";
 import Navbar from "./navbar/Navbar";
+import UserProvider from "./components/UserProvider";
 
 export const metadata = {
-  title: "QUIZ APP",
-  description: "CODED BY PRINCE CEEJAY NG",
+  title: "CEEJAY'S PORTFOLIO",
+  description: "THIS IS A HUB FOR DISPLAYING MY CODING SKILLS",
 };
 
 export default function RootLayout({ children }) {
@@ -26,19 +27,21 @@ export default function RootLayout({ children }) {
   }
   return (
     <html lang="en">
-      <body>
-        <div className="flex min-h-screen overflow-hidden">
-          {/* Background Layer */}
-          <div
-            className="fixed inset-0 -z-10 bg-cover bg-center opacity-30"
-            style={{
-              backgroundImage: "url('/female-developer.jpg')",
-            }}
-          />
-          <Navbar />
-          {children}
-        </div>
-      </body>
+      <UserProvider>
+        <body>
+          <div className="flex min-h-screen overflow-hidden">
+            {/* Background Layer */}
+            <div
+              className="fixed inset-0 -z-10 bg-cover bg-center opacity-30"
+              style={{
+                backgroundImage: "url('/female-developer.jpg')",
+              }}
+            />
+            <Navbar />
+            {children}
+          </div>
+        </body>
+      </UserProvider>
     </html>
   );
 }

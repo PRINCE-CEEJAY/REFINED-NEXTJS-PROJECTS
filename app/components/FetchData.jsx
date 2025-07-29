@@ -11,10 +11,6 @@ const FetchData = () => {
   const [retrievedUser, setretrievedUser] = useState(null);
 
   useEffect(() => {
-    console.log("new Advice " + dataCount);
-  }, [loadedAdvice]);
-
-  useEffect(() => {
     try {
       const getUser = localStorage.getItem("storedUser");
       const storedUser = JSON.parse(getUser);
@@ -33,16 +29,18 @@ const FetchData = () => {
   };
   return (
     <div className="flex flex-col justify-center items-center space-y-2 min-h-screen">
-      <h1 className="text-center font-bold">Welcome {retrievedUser} </h1>
+      <h1 className="text-center font-bold">
+        {retrievedUser ? "Welcome to Advice Tab " : "Advice Tab"}
+      </h1>
       <div className="flex flex-col justfiy-center items-center">
         <h2 className="text-center font-bold text-blue-900">
           Number: {dataCount}
         </h2>
-        <h1 className="text-center font-bold text-red-900">
+        <h1 className="text-center font-bold text-red-900 text-5xl">
           {loading ? "Loading..." : loadedAdvice}
         </h1>
         <button
-          className="bg-green-600 cursor-pointer text-white hover:bg-green-400  w-full text-xl rounded-sm"
+          className="bg-green-600 cursor-pointer text-white hover:bg-green-400 font-extrabold text-2xl rounded-sm mt-4 p-2"
           onClick={handleGetAdvice}
         >
           Fetch Advice

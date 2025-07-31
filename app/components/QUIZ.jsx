@@ -33,14 +33,14 @@ const Quiz = () => {
           <button
             className="bg-green-500 w-25 hover:cursor-pointer hover:bg-green-400 p-1 rounded-md"
             onClick={() => dispatch({ type: "previous" })}
-            disabled={state.questionIndex === 0}
+            // disabled={state.questionIndex === 0}
           >
             Previous
           </button>
           <button
             className="bg-green-500 w-25 hover:cursor-pointer hover:bg-green-400 p-1 rounded-md"
             onClick={() => dispatch({ type: "next", data: quizData })}
-            disabled={state.questionIndex === quizData.length - 1}
+            // disabled={state.questionIndex === quizData.length - 1}
           >
             Next
           </button>

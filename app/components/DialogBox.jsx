@@ -8,7 +8,7 @@ const DialogBox = ({ notes, onClose }) => {
   useEffect(() => {
     if (action === "Yes") {
       try {
-        localStorage.setItem("note", JSON.stringify(notes));
+        localStorage.setItem("storedNote", JSON.stringify(notes));
         onClose(true);
       } catch (error) {
         onClose(false);

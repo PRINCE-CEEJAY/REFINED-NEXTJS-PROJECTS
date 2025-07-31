@@ -14,9 +14,8 @@ const DashboardPage = () => {
         Welcome {user || "Guest"}
       </h1>
 
-      <FetchData />
-
       <Notes />
+      <FetchData />
     </div>
   );
 };

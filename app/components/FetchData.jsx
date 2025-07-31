@@ -37,13 +37,18 @@ const FetchData = () => {
         <h2 className="text-center font-bold text-blue-900">
           Number: {dataCount}
         </h2>
-        <h1 className="text-center font-bold text-red-900 text-5xl">
+        <motion.h1
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="text-center font-bold text-red-900 text-5xl"
+        >
           {loading ? "Loading..." : loadedAdvice}
-        </h1>
+        </motion.h1>
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="bg-green-600 cursor-pointer text-white hover:bg-green-400 font-extrabold text-2xl rounded-sm mt-4 p-4"
+          className="bg-green-600 cursor-pointer text-white hover:bg-green-500 shadow-lg font-extrabold text-2xl rounded-sm mt-4 p-4"
           onClick={handleGetAdvice}
         >
           Fetch Advice

@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "./navbar/Navbar";
 import UserProvider from "./components/UserProvider";
+import Footer from "./components/Footer";
 
 export const metadata = {
   title: "CEEJAY'S PORTFOLIO",
@@ -28,8 +29,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <UserProvider>
-        <body>
-          <div className="flex min-h-screen overflow-hidden">
+        <body className="flex flex-col min-h-screen">
+          <div className="flex flex-grow min-h-screen overflow-hidden">
             {/* Background Layer */}
             <div
               className="fixed inset-0 -z-10 bg-cover bg-center opacity-30"
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
             <Navbar />
             {children}
           </div>
+          <Footer />
         </body>
       </UserProvider>
     </html>

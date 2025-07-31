@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
+import { useState } from "react";
 import Link from "next/link";
-// import List from "../List.css";
+import { IoOptions } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
 import { BiSolidDashboard } from "react-icons/bi";
 import { SlFeed } from "react-icons/sl";
@@ -11,9 +12,15 @@ import { FcFaq } from "react-icons/fc";
 import { MdJoinFull } from "react-icons/md";
 
 const Navbar = () => {
+  const [showOptions, setShowOptions] = useState(false);
+
   return (
-    <div className="flex flex-col bg-green-100  min-h-screen p-3 max-w-[37%] lg:w-50 sticky top-0">
-      <nav className="flex flex-col space-y-7">
+    <div className="flex-col flex-grow max-w-40 min-h-full p-3 ">
+      <IoOptions
+        onClick={() => setShowOptions(!showOptions)}
+        className="cursor-pointer text-center"
+      />
+      <nav className={showOptions ? "flex flex-col space-y-7" : "hidden"}>
         <div className="flex justify-center hover:cursor-pointer">
           <img src="/welcome.jpg" alt="Profile Pic" width={100} height={100} />
         </div>
